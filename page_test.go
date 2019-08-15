@@ -2,21 +2,22 @@ package spotify
 
 import (
 	"errors"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestClient_NextPage(t *testing.T) {
 	testTable := []struct {
 		Name         string
-		Input        *basePage
+		Input        *BasePage
 		ExpectedPath string
 		Err          error
 	}{
 		{
 			"success",
-			&basePage{
+			&BasePage{
 				Next:  "/v1/albums/0sNOF9WDwhWunNAHPD3Baj/tracks",
 				Total: 600,
 			},
@@ -25,7 +26,7 @@ func TestClient_NextPage(t *testing.T) {
 		},
 		{
 			"no more pages",
-			&basePage{
+			&BasePage{
 				Next: "",
 			},
 			"",
@@ -65,13 +66,13 @@ func TestClient_NextPage(t *testing.T) {
 func TestClient_PreviousPage(t *testing.T) {
 	testTable := []struct {
 		Name         string
-		Input        *basePage
+		Input        *BasePage
 		ExpectedPath string
 		Err          error
 	}{
 		{
 			"success",
-			&basePage{
+			&BasePage{
 				Previous: "/v1/albums/0sNOF9WDwhWunNAHPD3Baj/tracks",
 				Total:    600,
 			},
@@ -80,7 +81,7 @@ func TestClient_PreviousPage(t *testing.T) {
 		},
 		{
 			"no more pages",
-			&basePage{
+			&BasePage{
 				Previous: "",
 			},
 			"",

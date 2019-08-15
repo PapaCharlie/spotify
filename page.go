@@ -13,10 +13,10 @@ var ErrNoMorePages = errors.New("spotify: no more pages")
 // This file contains the types that implement Spotify's paging object.
 // See: https://developer.spotify.com/web-api/object-model/#paging-object
 
-// basePage contains all of the fields in a Spotify paging object, except
+// BasePage contains all of the fields in a Spotify paging object, except
 // for the actual items.  This type is meant to be embedded in other types
 // that add the Items field.
-type basePage struct {
+type BasePage struct {
 	// A link to the Web API Endpoint returning the full
 	// result of this request.
 	Endpoint string `json:"href"`
@@ -36,75 +36,75 @@ type basePage struct {
 
 // FullArtistPage contains FullArtists returned by the Web API.
 type FullArtistPage struct {
-	basePage
+	BasePage
 	Artists []FullArtist `json:"items"`
 }
 
 // SimpleAlbumPage contains SimpleAlbums returned by the Web API.
 type SimpleAlbumPage struct {
-	basePage
+	BasePage
 	Albums []SimpleAlbum `json:"items"`
 }
 
 // SavedAlbumPage contains SavedAlbums returned by the Web API.
 type SavedAlbumPage struct {
-	basePage
+	BasePage
 	Albums []SavedAlbum `json:"items"`
 }
 
 // SavedShowPage contains SavedShows returned by the Web API
 type SavedShowPage struct {
-	basePage
+	BasePage
 	Shows []SavedShow `json:"items"`
 }
 
 // SimplePlaylistPage contains SimplePlaylists returned by the Web API.
 type SimplePlaylistPage struct {
-	basePage
+	BasePage
 	Playlists []SimplePlaylist `json:"items"`
 }
 
 // SimpleTrackPage contains SimpleTracks returned by the Web API.
 type SimpleTrackPage struct {
-	basePage
+	BasePage
 	Tracks []SimpleTrack `json:"items"`
 }
 
 // FullTrackPage contains FullTracks returned by the Web API.
 type FullTrackPage struct {
-	basePage
+	BasePage
 	Tracks []FullTrack `json:"items"`
 }
 
 // SavedTrackPage contains SavedTracks return by the Web API.
 type SavedTrackPage struct {
-	basePage
+	BasePage
 	Tracks []SavedTrack `json:"items"`
 }
 
 // PlaylistTrackPage contains information about tracks in a playlist.
 type PlaylistTrackPage struct {
-	basePage
+	BasePage
 	Tracks []PlaylistTrack `json:"items"`
 }
 
 // CategoryPage contains Category objects returned by the Web API.
 type CategoryPage struct {
-	basePage
+	BasePage
 	Categories []Category `json:"items"`
 }
 
 // SimpleEpisodePage contains EpisodePage returned by the Web API.
 type SimpleEpisodePage struct {
-	basePage
+	BasePage
 	Episodes []EpisodePage `json:"items"`
 }
 
 // pageable is an internal interface for types that support paging
-// by embedding basePage.
+// by embedding BasePage.
 type pageable interface{ canPage() }
 
-func (b *basePage) canPage() {}
+func (b *BasePage) canPage() {}
 
 // NextPage fetches the next page of items and writes them into p.
 // It returns ErrNoMorePages if p already contains the last page.
